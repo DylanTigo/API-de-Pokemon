@@ -11,7 +11,7 @@ app
   .use(favicon(__dirname + "/favicon.ico"))
   .use(morgan("dev"))
   .use(bodyParser.json());
-
+  
 sequelize.initDb();
 
 //Route pour l'affichage de tous les pokemons
@@ -29,11 +29,14 @@ require("./src/routes/updatePokemon")(app);
 //Route pour supprimmer un pokemon
 require("./src/routes/deletePokemon")(app);
 
+//Route d'authenfification
+require("./src/routes/login")(app);
 //Route pour le 404
 app.use(({res}) => {
   const message = 'Impossible de  trouver cette page';
   res.status(404).json({message});
 });
+
 
 app.listen(port, () =>
   console.log(`Notre application est démarée sur : http://localhost:${port}`)
